@@ -2,9 +2,6 @@ import random
 import numpy as np
 import networkx as nx
 
-from Compare_prims_and_Kruskal import density
-
-
 # Generate dense graph as adjacency matrix
 def generate_dense_graph(num_vertices, max_weight=10):
     graph = [[0] * num_vertices for _ in range(num_vertices)]

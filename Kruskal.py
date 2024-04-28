@@ -28,32 +28,33 @@ def union(parent, rank, x, y):
         parent[yroot] = xroot
         rank[xroot] += 1
 
-def kruskal(adj_matrix):
-    num_vertices = len(adj_matrix)
+def kruskal(graph):
+    V = len(graph)
     result = []
 
     # Sort all the edges in non-decreasing order of their weight
     edges = []
-    for i in range(num_vertices):
-        for j in range(i + 1, num_vertices):
-            if adj_matrix[i][j] != 0:
-                edges.append((i, j, adj_matrix[i][j]))
-    edges = sorted(edges, key=lambda x: x[2])
+    for i in range(V):
+        for j in range(i + 1, V):
+            if graph[i][j] != 0:
+                edges.append((i, j, graph[i][j]))
+    edges.sort(key=lambda x: x[2])
 
-    parent = [i for i in range(num_vertices)]
-    rank = [0] * num_vertices
+    parent = [i for i in range(V)]
+    rank = [0] * V
 
-    i = 0
-    e = 0
-    while e < num_vertices - 1 and i < len(edges):
-        u, v, weight = edges[i]
+    i = 0  # index variable, used for sorted edges
+    e = 0  # index variable, used for result[]
+
+    while e < V - 1:
+        u, v, w = edges[i]
         i += 1
         x = find(parent, u)
         y = find(parent, v)
 
         if x != y:
             e += 1
-            result.append((u, v, weight))
+            result.append([u, v, w])
             union(parent, rank, x, y)
 
     return result
