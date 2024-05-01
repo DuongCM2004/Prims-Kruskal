@@ -38,7 +38,7 @@ def prim(adj_matrix):
                 mst[v] = u
                 key[v] = adj_matrix[u][v]
 
-    for i in range(len(mst)):
+    for i in range(1, len(mst)):
         result.append([mst[i], i, key[i]])
     return result
 
