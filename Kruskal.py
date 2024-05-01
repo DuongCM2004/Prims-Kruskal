@@ -46,7 +46,7 @@ def kruskal(graph):
     i = 0  # index variable, used for sorted edges
     e = 0  # index variable, used for result[]
 
-    while e < V - 1:
+    while e < V - 1 and i < len(edges):
         u, v, w = edges[i]
         i += 1
         x = find(parent, u)

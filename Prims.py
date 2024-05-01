@@ -25,6 +25,7 @@ def prim(adj_matrix):
     # Start from the first vertex
     key[0] = 0
     mst[0] = -1
+    result = []
 
     for _ in range(vertices):
         # Choose the minimum key vertex not yet in MST
@@ -37,7 +38,9 @@ def prim(adj_matrix):
                 mst[v] = u
                 key[v] = adj_matrix[u][v]
 
-    return mst
+    for i in range(len(mst)):
+        result.append([mst[i], i, key[i]])
+    return result
 
 def prim_mst(graph):
     # Initialize an empty MST

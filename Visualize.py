@@ -17,7 +17,7 @@ def visualize_adjacency_matrix(adjacency_matrix):
     # Show the graph
     plt.show()
 
-def visualize_mst(sparse_matrix, mst_sparse):
+def visualize_mst(mst_sparse, key):
     G = nx.Graph()
 
     for i in range(1, len(mst_sparse)):
@@ -26,11 +26,11 @@ def visualize_mst(sparse_matrix, mst_sparse):
     # Draw the graph
     pos = nx.spring_layout(G)
     nx.draw(G, pos, with_labels=True, node_size=700, node_color='lightblue', font_size=12, font_weight='bold')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels={(i, mst_sparse[i]): sparse_matrix[i][mst_sparse[i]] for i in range(1, len(mst_sparse))})
+    nx.draw_networkx_edge_labels(G, pos, edge_labels={(i, mst_sparse[i]): key[i] for i in range(1, len(mst_sparse))})
     plt.title("Minimum Spanning Tree (MST)")
     plt.show()
 
-def visualize_mst_list(adjacency_matrix, mst_edges):
+def visualize_mst_list(mst_edges):
     G = nx.Graph()
 
     # Add edges to the graph
@@ -42,7 +42,7 @@ def visualize_mst_list(adjacency_matrix, mst_edges):
     nx.draw(G, pos, with_labels=True, node_size=700, node_color='lightblue', font_size=12, font_weight='bold')
 
     # Add edge labels
-    edge_labels = {(edge[0], edge[1]): adjacency_matrix[edge[0]][edge[1]] for edge in mst_edges}
+    edge_labels = {(edge[0], edge[1]): edge[2] for edge in mst_edges}
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
 
     plt.title("Minimum Spanning Tree (MST)")

@@ -11,10 +11,11 @@ print(graph1)
 
 # Test Prims
 mst_graph = Prims.prim(graph1)
+mst_graph1 = mst_graph.pop(0)
 min_sum = 0
 for i in range(1, len(mst_graph)):
-        print(f"{mst_graph[i]} - {i} \t {graph1[i][mst_graph[i]]}")
-        min_sum += graph1[i][mst_graph[i]]
+        print(f"{mst_graph[i][0]} - {mst_graph[i][1]} \t {mst_graph[i][2]}")
+        min_sum += mst_graph[i][2]
 print('Sum: ', min_sum)
 
 
@@ -26,6 +27,6 @@ for i in range(len(mst_graph2)):
         min_sum1 += mst_graph2[i][2]
 print('Sum1: ', min_sum1)
 
-Vi.visualize_mst(graph1, mst_graph)
-Vi.visualize_mst_list(graph1, mst_graph2)
+Vi.visualize_mst_list(mst_graph1)
+Vi.visualize_mst_list( mst_graph2)
 
