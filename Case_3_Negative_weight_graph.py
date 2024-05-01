@@ -26,6 +26,7 @@ for i in range(len(mst_graph2)):
         min_sum1 += mst_graph2[i][2]
 print('Sum1: ', min_sum1)
 
+Vi.visualize_adjacency_matrix(graph1)
 Vi.visualize_mst_list(mst_graph)
 Vi.visualize_mst_list(mst_graph2)
 
