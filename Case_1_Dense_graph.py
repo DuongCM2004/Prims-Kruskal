@@ -11,7 +11,7 @@ print(graph1)
 # Test Prims
 mst_graph = Prims.prim(graph1)
 min_sum = 0
-for i in range(1, len(mst_graph)):
+for i in range(len(mst_graph)):
         print(f"{mst_graph[i][0]} - {mst_graph[i][1]} \t {mst_graph[i][2]}")
         min_sum += mst_graph[i][2]
 print('Sum: ', min_sum)
