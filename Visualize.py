@@ -1,8 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
-def visualize_adjacency_matrix(adjacency_matrix):
-    # Convert the adjacency matrix to a NetworkX graph
+
+def visualize(adjacency_matrix, mst_edges1, mst_edges2):
+    plt.figure(figsize = (10, 10))
+    # Graph original
+    plt.subplot(1, 3, 1)
     G = nx.from_numpy_array(np.array(adjacency_matrix))
 
     # Create a dictionary to store edge labels
@@ -10,40 +13,46 @@ def visualize_adjacency_matrix(adjacency_matrix):
                    range(len(adjacency_matrix[i])) if adjacency_matrix[i][j] != 0}
 
     # Draw the graph
-    plt.figure(figsize=(6, 6))
     pos = nx.spring_layout(G)  # Position nodes using Fruchterman-Reingold force-directed algorithm
     nx.draw(G, pos, with_labels=True, font_weight='bold')
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)  # Draw edge labels
     # Show the graph
-    plt.show()
+    plt.title("Original graph")
 
-def visualize_mst(mst_sparse, key):
-    G = nx.Graph()
 
-    for i in range(1, len(mst_sparse)):
-        G.add_edge(i, mst_sparse[i])
-
-    # Draw the graph
-    pos = nx.spring_layout(G)
-    nx.draw(G, pos, with_labels=True, node_size=700, node_color='lightblue', font_size=12, font_weight='bold')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels={(i, mst_sparse[i]): key[i] for i in range(1, len(mst_sparse))})
-    plt.title("Minimum Spanning Tree (MST)")
-    plt.show()
-
-def visualize_mst_list(mst_edges):
-    G = nx.Graph()
+    # Draw the Prims graph
+    plt.subplot(1, 3, 2)
+    G1 = nx.Graph()
 
     # Add edges to the graph
-    for edge in mst_edges:
-        G.add_edge(edge[0], edge[1])
+    for edge in mst_edges1:
+        G1.add_edge(edge[0], edge[1])
 
     # Draw the graph
-    pos = nx.spring_layout(G)
-    nx.draw(G, pos, with_labels=True, node_size=700, node_color='lightblue', font_size=12, font_weight='bold')
+    pos = nx.spring_layout(G1)
+    nx.draw(G1, pos, with_labels=True, node_size=700, node_color='lightblue', font_size=12, font_weight='bold')
 
     # Add edge labels
-    edge_labels = {(edge[0], edge[1]): edge[2] for edge in mst_edges}
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+    edge_labels = {(edge[0], edge[1]): edge[2] for edge in mst_edges1}
+    nx.draw_networkx_edge_labels(G1, pos, edge_labels=edge_labels)
 
-    plt.title("Minimum Spanning Tree (MST)")
+    plt.title("Minimum Spanning Tree (Prims)")
+
+    #Draw the Kruskal graph
+    plt.subplot(1, 3, 3)
+    G2 = nx.Graph()
+
+    # Add edges to the graph
+    for edge in mst_edges2:
+        G2.add_edge(edge[0], edge[1])
+
+    # Draw the graph
+    pos = nx.spring_layout(G2)
+    nx.draw(G2, pos, with_labels=True, node_size=700, node_color='lightblue', font_size=12, font_weight='bold')
+
+    # Add edge labels
+    edge_labels = {(edge[0], edge[1]): edge[2] for edge in mst_edges2}
+    nx.draw_networkx_edge_labels(G2, pos, edge_labels=edge_labels)
+
+    plt.title("Minimum Spanning Tree (Kruskal)")
     plt.show()
