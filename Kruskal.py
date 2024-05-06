@@ -80,3 +80,35 @@ def kruskal_mst(graph):
             union(parent, rank, src, dest)
 
     return minimum_spanning_tree
+
+def kruskal_comparison(graph):
+    V = len(graph)
+    result = []
+
+    # Sort all the edges in non-decreasing order of their weight
+    edges = []
+    for i in range(V):
+        for j in range(i + 1, V):
+            if graph[i][j] != 0:
+                edges.append((i, j, graph[i][j]))
+    edges.sort(key=lambda x: x[2])
+
+    parent = [i for i in range(V)]
+    rank = [0] * V
+    comparisons = 0
+
+    i = 0  # index variable, used for sorted edges
+    e = 0  # index variable, used for result[]
+
+    while e < V - 1 and i < len(edges):
+        u, v, w = edges[i]
+        i += 1
+        x = find(parent, u)
+        y = find(parent, v)
+        comparisons += 1
+        if x != y:
+            e += 1
+            result.append([u, v, w])
+            union(parent, rank, x, y)
+
+    return comparisons

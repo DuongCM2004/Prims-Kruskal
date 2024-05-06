@@ -76,3 +76,32 @@ def prim_mst(graph):
             unvisited.remove(v)
 
     return mst
+
+def prim_comparision(adj_matrix):
+    vertices = len(adj_matrix)
+    # Initialize lists to store MST and key values
+    mst = [None] * vertices
+    key = [sys.maxsize] * vertices
+    mst_set = [False] * vertices
+
+    # Start from the first vertex
+    key[0] = 0
+    mst[0] = -1
+    result = []
+    comparisons = 0
+
+    for _ in range(vertices):
+        # Choose the minimum key vertex not yet in MST
+        u = min_key(vertices, key, mst_set)
+        mst_set[u] = True
+
+        # Update key values and MST for adjacent vertices
+        for v in range(vertices):
+            if adj_matrix[u][v] and mst_set[v] == False:
+                comparisons += 1
+                if key[v] > adj_matrix[u][v]:
+                    key[v] = adj_matrix[u][v]
+                    mst[v] = u
+    for i in range(1, len(mst)):
+        result.append([mst[i], i, key[i]])
+    return comparisons
